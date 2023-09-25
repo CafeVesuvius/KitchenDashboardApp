@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:KitchenDashboardApp.Model"
+             xmlns:vm="clr-namespace:KitchenDashboardApp.ViewModel"
+             x:DataType="vm:MainViewModel"
+             x:Class="KitchenDashboardApp.MainPage">
+
+    <RefreshView
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshCommand}">
+
+        <CollectionView ItemsSource="{Binding Orders}"
+                        ItemsLayout="HorizontalGrid, 5"
+                        >
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Order">
+                    <Border Stroke="Blue"
+                                StrokeThickness="2"
+                                Padding="5">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="10,10,10,10"/>
+                        </Border.StrokeShape>
+                        <Grid Padding="1"
+                                  RowDefinitions="auto, auto, auto"
+                                  ColumnDefinitions="auto, auto, auto"
+                                  ColumnSpacing="10"
+                                  RowSpacing="5">
+
+                            <Label Grid.Column="0"
+                                       Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"
+                                       LineBreakMode="TailTruncation"/>
+                            <Label Grid.Column="1"
+                                       Text="{Binding Created}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"
+                                       LineBreakMode="TailTruncation"/>
+                            <StackLayout Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Spacing="5">
+                                <Button
+                                        Background="ForestGreen"
+                                        Command="{Binding Source={RelativeSource 
+                                                    AncestorType={x:Type vm:MainViewModel}}, 
+                                                    Path=OrderCompletedCommand}"
+                                        CommandParameter="{Binding .}"
+                                        Text="Done"/>
+                                <Button 
+                                        BackgroundColor="IndianRed"
+                                        Text="Aflys"/>
+                            </StackLayout>
+                            <CollectionView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                                    ItemsSource="{Binding OrderLines}">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="models:OrderLine">
+                                        <Border Padding="4">
+                                            <Grid RowDefinitions="auto, auto, auto"
+                                              ColumnDefinitions="auto, auto">
+                                                <Label Grid.Column="0" Grid.Row="0"
+                                                    Text="{Binding MenuItem.Name}"
+                                                    FontAttributes="Bold"/>
+                                                <Label Grid.Column="0" Grid.Row="1"
+                                                    Text="Quantatiy:"/>
+                                                <Label Grid.Column="1" Grid.Row="1"
+                                                    Text="{Binding Quantity}"/>
+                                                <Label Grid.Column="0" Grid.Row="2"
+                                                    MaximumWidthRequest="250"
+                                                    Text="-Tomat, -Løg, -Champignoner +Ost, +Extra bøf"
+                                                    LineBreakMode="WordWrap"/>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </RefreshView>
+    
+</ContentPage>
