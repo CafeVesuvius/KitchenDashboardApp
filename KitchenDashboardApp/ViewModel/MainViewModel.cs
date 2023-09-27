@@ -9,6 +9,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KitchenDashboardApp.Controllers;
 
 namespace KitchenDashboardApp.ViewModel
 {
@@ -18,7 +19,7 @@ namespace KitchenDashboardApp.ViewModel
         ObservableCollection<Order> orders;
 
         [ObservableProperty]
-        bool isRefreshing;
+        bool isRefreshing = true;
 
         System.Timers.Timer refreshTimer;
 
@@ -31,7 +32,7 @@ namespace KitchenDashboardApp.ViewModel
 
         public void InitTimer()
         {
-            refreshTimer = new System.Timers.Timer(10000);
+            refreshTimer = new System.Timers.Timer(30000);
             refreshTimer.Elapsed += timer_Elapsed;
             refreshTimer.AutoReset = true;
             refreshTimer.Enabled = true;
@@ -41,7 +42,10 @@ namespace KitchenDashboardApp.ViewModel
             IsRefreshing = !IsRefreshing;
             if (IsRefreshing)
             {
-                await Refresh();
+                try
+                {
+                    await Refresh();
+                } catch (Exception ex) { }
             }
         }
 
@@ -58,6 +62,10 @@ namespace KitchenDashboardApp.ViewModel
                 }
                 finally { IsRefreshing = false; }
             }
+            else
+            {
+                IsRefreshing = false;
+            }
         }
 
         [RelayCommand]
@@ -69,7 +77,21 @@ namespace KitchenDashboardApp.ViewModel
                 order.Completed = true;
                 await APIAcess.OrderCompleted(order);
             }
-            finally { refreshTimer.Start(); }
+            finally {
+                IsRefreshing = !IsRefreshing;
+                await Refresh();
+                refreshTimer.Start();
+            }
+        }
+
+        [RelayCommand]
+        async Task OrderDeleted(Order order)
+        {
+            try
+            {
+                refreshTimer.Stop();
+                await APIAcess.OrderDeleted(order);
+            } finally { refreshTimer.Start(); }
         }
     }
 }

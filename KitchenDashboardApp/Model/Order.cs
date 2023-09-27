@@ -11,8 +11,10 @@ namespace KitchenDashboardApp.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public DateTime Created { get; set; }
-        public bool Completed { get; set; }
+        [JsonProperty("createdDate")]
+        public DateTime? Created { get; set; }
+        [JsonProperty("isCompleted")]
+        public bool? Completed { get; set; }
         [JsonProperty("orderLines")]
         public List<OrderLine> OrderLines { get; set; }
     }

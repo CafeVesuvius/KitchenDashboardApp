@@ -10,6 +10,7 @@ namespace KitchenDashboardApp.Model
     public class OrderLine
     {
         public int Id { get; set; }
+        public string Detail { get; set; }
         public int Quantity { get; set; }
         [JsonProperty("menuItem")]
         public MenuItem MenuItem { get; set; }

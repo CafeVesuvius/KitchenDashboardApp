@@ -1,6 +1,6 @@
 ﻿using KitchenDashboardApp.ViewModel;
 
-namespace KitchenDashboardApp
+namespace KitchenDashboardApp.View
 {
     public partial class MainPage : ContentPage
     {

@@ -1,6 +1,8 @@
 ﻿using KitchenDashboardApp.ViewModel;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using KitchenDashboardApp.View;
+using KitchenDashboardApp.Data.Services;
 
 namespace KitchenDashboardApp
 {
@@ -14,10 +16,21 @@ namespace KitchenDashboardApp
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             }).UseMauiCommunityToolkit();
+
+
+            // Services
+            builder.Services.AddSingleton<ILoginService, LoginService>();
+
             // Dependency service for views
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<LoadingPage>();
+
             // Dependecy service for viewmodels
             builder.Services.AddSingleton<MainViewModel>();
+            builder.Services.AddSingleton<LoginViewModel>();
+            builder.Services.AddSingleton<LoadingViewModel>();
+
 #if DEBUG
             builder.Logging.AddDebug();
 #endif
