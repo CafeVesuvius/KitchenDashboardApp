@@ -20,59 +20,61 @@
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="10,10,10,10"/>
                         </Border.StrokeShape>
-                        <Grid     Padding="10"
-                                  MaximumWidthRequest="500"
-                                  RowDefinitions="auto, auto, auto"
-                                  ColumnDefinitions="2*, 2*, *"
-                                  ColumnSpacing="10"
-                                  RowSpacing="5">
-                                
-                            <Label Grid.Column="0"
-                                       Text="{Binding Name}"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium"
-                                       LineBreakMode="TailTruncation"/>
-                            <Label Grid.Column="1"
-                                       Text="{Binding Created}"
-                                       FontAttributes="Bold"
-                                       FontSize="Medium"
-                                       LineBreakMode="TailTruncation"/>
+                        <Grid     
+                            Padding="5"                         
+                            MaximumWidthRequest="500"
+                            RowDefinitions="auto, auto, auto"
+                            ColumnDefinitions=".80*, *, auto"
+                            ColumnSpacing="10"
+                            RowSpacing="5">
 
-                            <StackLayout Grid.Column="2" Grid.Row="0" Grid.RowSpan="3" Spacing="5" Margin="10" HorizontalOptions="End" VerticalOptions="Center">  
+                            <HorizontalStackLayout Grid.Column="0" Spacing="10">
+                                <Label Text="{Binding Name}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"
+                                       LineBreakMode="TailTruncation"/>
+                                <Label Text="{Binding CreatedTimeOnly}"
+                                       FontAttributes="Bold"
+                                       FontSize="Medium"
+                                       LineBreakMode="TailTruncation"/>
+                            </HorizontalStackLayout>
+
+                            <StackLayout Grid.Column="2" Grid.Row="0" Grid.RowSpan="2" Spacing="5" Margin="10"  Padding="0"
+                                         HorizontalOptions="EndAndExpand" VerticalOptions="StartAndExpand">  
                                 <Button
                                         Background="ForestGreen"
                                         Command="{Binding Source={RelativeSource 
                                                     AncestorType={x:Type vm:MainViewModel}}, 
                                                     Path=OrderCompletedCommand}"
                                         CommandParameter="{Binding .}"
-                                        Text="Done"/>
+                                        Text="Færdig"/>
                                 <Button 
                                         BackgroundColor="IndianRed"
                                         Command="{Binding Source={RelativeSource 
                                                     AncestorType={x:Type vm:MainViewModel}}, 
                                                     Path=OrderDeletedCommand}"
                                         CommandParameter="{Binding .}"
-                                        Text="Aflys"/>
+                                        Text="Annuller"/>
                             </StackLayout>
-                            <CollectionView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2"
+                            <CollectionView Grid.Column="0" Grid.Row="1"
                                     ItemsSource="{Binding OrderLines}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:OrderLine">
                                         <Border Padding="4">
-                                            <Grid RowDefinitions="auto, auto, auto"
-                                              ColumnDefinitions="auto, auto">
+                                            <StackLayout>
                                                 <Label Grid.Column="0" Grid.Row="0"
                                                     Text="{Binding MenuItem.Name}"
                                                     FontAttributes="Bold"/>
-                                                <Label Grid.Column="0" Grid.Row="1"
-                                                    Text="Quantatiy:"/>
-                                                <Label Grid.Column="1" Grid.Row="1"
+                                                <HorizontalStackLayout Spacing="5">
+                                                    <Label Grid.Column="0" Grid.Row="1"
+                                                    Text="Mængde:"/>
+                                                    <Label Grid.Column="1" Grid.Row="1"
                                                     Text="{Binding Quantity}"/>
+                                                </HorizontalStackLayout>
                                                 <Label Grid.Column="0" Grid.Row="2"
                                                     MaximumWidthRequest="250"
-                                                    Text="-Tomat, -Løg, -Champignoner +Ost, +Extra bøf"
-                                                    LineBreakMode="WordWrap"/>
-                                            </Grid>
+                                                    Text="{Binding Detail}"/>
+                                            </StackLayout>
                                         </Border>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>

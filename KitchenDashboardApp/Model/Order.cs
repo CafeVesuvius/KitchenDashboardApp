@@ -1,8 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace KitchenDashboardApp.Model
@@ -11,11 +14,29 @@ namespace KitchenDashboardApp.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        [JsonProperty("createdDate")]
+        //[JsonProperty("createdDate")]
         public DateTime? Created { get; set; }
         [JsonProperty("isCompleted")]
         public bool? Completed { get; set; }
         [JsonProperty("orderLines")]
         public List<OrderLine> OrderLines { get; set; }
+
+        public string? CreatedTimeOnly { get; set; }
+
+        [Newtonsoft.Json.JsonExtensionData]
+        private IDictionary<string, JToken> _additionalData;
+
+        [OnDeserialized]
+        private void OnDeserialized(StreamingContext context)
+        {
+            // SAMAccountName is not deserialized to any property
+            // and so it is added to the extension data dictionary
+            DateTime date = (DateTime)_additionalData["createdDate"];
+
+            Created = date;
+            CreatedTimeOnly = date.ToString("HH:mm");
+        }
+
     }
 }
+ 

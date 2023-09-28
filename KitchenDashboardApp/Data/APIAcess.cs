@@ -31,7 +31,10 @@ namespace KitchenDashboardApp.Data
             try
             {
                 var json = await client.GetStringAsync(ApiBaseUrl + "order/incomplete");
-                var orders = JsonConvert.DeserializeObject<List<Order>>(json);
+                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(json, new JsonSerializerSettings
+                {
+                    DateFormatString = "HH:mm"
+                });
                 return orders;
             } catch (Exception ex)
             {

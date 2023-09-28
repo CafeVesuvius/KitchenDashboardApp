@@ -32,7 +32,7 @@ namespace KitchenDashboardApp.ViewModel
 
         public void InitTimer()
         {
-            refreshTimer = new System.Timers.Timer(30000);
+            refreshTimer = new System.Timers.Timer(60000);
             refreshTimer.Elapsed += timer_Elapsed;
             refreshTimer.AutoReset = true;
             refreshTimer.Enabled = true;
@@ -91,7 +91,11 @@ namespace KitchenDashboardApp.ViewModel
             {
                 refreshTimer.Stop();
                 await APIAcess.OrderDeleted(order);
-            } finally { refreshTimer.Start(); }
+            } finally {
+                IsRefreshing = !IsRefreshing;
+                await Refresh();
+                refreshTimer.Start();
+            }
         }
     }
 }
