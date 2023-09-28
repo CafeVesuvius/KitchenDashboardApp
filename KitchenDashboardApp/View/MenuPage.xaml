@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:models="clr-namespace:KitchenDashboardApp.Model"
+             xmlns:vm="clr-namespace:KitchenDashboardApp.ViewModel"
+             x:DataType="vm:MenuViewModel"
+             x:Class="KitchenDashboardApp.View.MenuPage"
+             Title="Menu">
+    <RefreshView 
+        IsRefreshing="{Binding IsRefreshing}"
+        Command="{Binding RefreshCommand}">
+
+        <CollectionView ItemsSource="{Binding Menus}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Menu">
+                    <StackLayout Spacing="10" Padding="10">
+                        <CollectionView ItemsSource="{Binding MenuItems}" ItemsLayout="VerticalGrid, 4">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:MenuItem">
+                                    <Frame Margin="10">
+                                        <StackLayout>
+                                            <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Description}"/>
+                                            <HorizontalStackLayout>
+                                                <Label Text="Pris: "/>
+                                                <Label Text="{Binding UnitPrice}"/>
+                                            </HorizontalStackLayout>
+                                            <Label Text="{Binding Active}"/>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </RefreshView>
+</ContentPage>

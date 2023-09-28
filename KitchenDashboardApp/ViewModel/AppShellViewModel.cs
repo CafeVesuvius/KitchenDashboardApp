@@ -21,6 +21,9 @@ namespace KitchenDashboardApp.ViewModel
             var OrderBoardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(MainPage)).FirstOrDefault();
             if (OrderBoardInfo != null) AppShell.Current.Items.Remove(OrderBoardInfo);
 
+            var menuPage = AppShell.Current.Items.Where(f => f.Route == nameof(MenuPage)).FirstOrDefault();
+            if (menuPage != null) AppShell.Current.Items.Remove(menuPage);
+
             await Shell.Current.GoToAsync($"//{nameof(LoginPage)}");
         }
     }

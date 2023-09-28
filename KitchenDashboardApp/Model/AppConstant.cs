@@ -16,10 +16,12 @@ namespace KitchenDashboardApp.Model
         {
             AppShell.Current.FlyoutHeader = new FlyoutHeaderControl();
 
-            var OrderBoardInfo = AppShell.Current.Items.Where(f => f.Route == nameof(MainPage)).FirstOrDefault();
-            if(OrderBoardInfo != null) AppShell.Current.Items.Remove(OrderBoardInfo);
+            var mainPage = AppShell.Current.Items.Where(f => f.Route == nameof(MainPage)).FirstOrDefault();
+            if(mainPage != null) AppShell.Current.Items.Remove(mainPage);
 
-            
+            var menuPage = AppShell.Current.Items.Where(f => f.Route == nameof(MenuPage)).FirstOrDefault();
+            if (menuPage != null) AppShell.Current.Items.Remove(menuPage);
+
 
             if (App.UserDetails.RoleId == (int)RoleDetails.Chef)
             {
@@ -34,6 +36,11 @@ namespace KitchenDashboardApp.Model
                                 {
                                     Title = "Køkken Dashboard",
                                     ContentTemplate = new DataTemplate(typeof(MainPage)),
+                                },
+                                new ShellContent
+                                {
+                                    Title = "Menu Oversigt",
+                                    ContentTemplate = new DataTemplate(typeof(MenuPage)),
                                 },
                             }
                 };

@@ -31,18 +31,13 @@ namespace KitchenDashboardApp.Data
             try
             {
                 var json = await client.GetStringAsync(ApiBaseUrl + "order/incomplete");
-                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(json, new JsonSerializerSettings
-                {
-                    DateFormatString = "HH:mm"
-                });
+                List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(json);
                 return orders;
             } catch (Exception ex)
             {
                 return null;
             }
-
         }
-
         public static async Task OrderCompleted(Order order)
         {
             try
@@ -60,6 +55,20 @@ namespace KitchenDashboardApp.Data
                 var json = JsonConvert.SerializeObject(order);
                 HttpResponseMessage response = await client.DeleteAsync($"order/{order.Id}");
             } catch (Exception ex) { }
+        }
+
+        public static async Task<List<Menu>> GetActiveMenu()
+        {
+            try
+            {
+                var json = await client.GetStringAsync(ApiBaseUrl + "menu/active");
+                List<Menu> menus = JsonConvert.DeserializeObject<List<Menu>>(json);
+                return menus;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
     }
 }
