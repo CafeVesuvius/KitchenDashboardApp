@@ -25,7 +25,11 @@
                                                 <Label Text="Pris: "/>
                                                 <Label Text="{Binding UnitPrice}"/>
                                             </HorizontalStackLayout>
-                                            <Label Text="{Binding Active}"/>
+                                            <Button 
+                                                BackgroundColor="IndianRed"
+                                                HeightRequest="50"
+                                                
+                                                Text="Utilgængelig"/>
                                         </StackLayout>
                                     </Frame>
                                 </DataTemplate>

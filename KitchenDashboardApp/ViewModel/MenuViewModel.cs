@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using KitchenDashboardApp.Data;
 using KitchenDashboardApp.Model;
+using KitchenDashboardApp.States;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -15,6 +16,7 @@ namespace KitchenDashboardApp.ViewModel
     {
         [ObservableProperty]
         ObservableCollection<Menu> menus;
+
 
         [ObservableProperty]
         bool isRefreshing = true;
@@ -46,6 +48,12 @@ namespace KitchenDashboardApp.ViewModel
             {
                 IsRefreshing = false;
             }
+        }
+
+        [RelayCommand]
+        async Task UpdateState(Model.MenuItem item)
+        {
+
         }
     }
 }
