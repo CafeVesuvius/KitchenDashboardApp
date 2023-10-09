@@ -14,7 +14,6 @@ namespace KitchenDashboardApp.Model
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        //[JsonProperty("createdDate")]
         public DateTime? Created { get; set; }
         [JsonProperty("isCompleted")]
         public bool? Completed { get; set; }
@@ -29,8 +28,6 @@ namespace KitchenDashboardApp.Model
         [OnDeserialized]
         private void OnDeserialized(StreamingContext context)
         {
-            // SAMAccountName is not deserialized to any property
-            // and so it is added to the extension data dictionary
             DateTime date = (DateTime)_additionalData["createdDate"];
 
             Created = date;

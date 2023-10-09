@@ -9,14 +9,6 @@
     xmlns:local="clr-namespace:KitchenDashboardApp.View"
     >
 
-    <!--<ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" 
-    
-    
-    />-->
-
     <ShellContent
         FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         Title="Home"

@@ -30,7 +30,7 @@ namespace KitchenDashboardApp.Data
         {
             try
             {
-                var json = await client.GetStringAsync(ApiBaseUrl + "order/incomplete");
+                var json = await client.GetStringAsync("order/incomplete");
                 List<Order> orders = JsonConvert.DeserializeObject<List<Order>>(json);
                 return orders;
             } catch (Exception ex)
@@ -61,7 +61,7 @@ namespace KitchenDashboardApp.Data
         {
             try
             {
-                var json = await client.GetStringAsync(ApiBaseUrl + "menu/active");
+                var json = await client.GetStringAsync("menu/active");
                 List<Menu> menus = JsonConvert.DeserializeObject<List<Menu>>(json);
                 return menus;
             }
@@ -69,6 +69,17 @@ namespace KitchenDashboardApp.Data
             {
                 return null;
             }
+        }
+        public static async Task MenuItemUpdate(Model.MenuItem menuItem)
+        {
+            try
+            {
+                var json = JsonConvert.SerializeObject(menuItem);
+                HttpResponseMessage response = await client.PutAsync($"menu/Item/{menuItem.Id}",
+                    new StringContent(json, Encoding.UTF8, "application/json"));
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex) { }
         }
     }
 }

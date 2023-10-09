@@ -12,12 +12,12 @@
             VerticalOptions="Center">
 
         <VerticalStackLayout Spacing="5">
-            <Label Text="Welcome!" FontSize="28" TextColor="Gray" HorizontalTextAlignment="Center" />
-            <Label Text="Login to your account" FontSize="18" TextColor="Gray" HorizontalTextAlignment="Center" />
+            <Label Text="Welcome!" Style="{StaticResource LoginPageLabls}" FontSize="28" HorizontalTextAlignment="Center" />
+            <Label Text="Login to your account" Style="{StaticResource LoginPageLabls}" FontSize="18"  HorizontalTextAlignment="Center" />
         </VerticalStackLayout>
 
         <StackLayout Orientation="Horizontal">
-            <Frame MaximumHeightRequest="60" Margin="-20,0,0,0" Padding="10" 
+            <Frame Style="{StaticResource LoginPageFrames}"
                    HasShadow="True" BorderColor="White"  
                    HorizontalOptions="FillAndExpand"  MaximumWidthRequest="250">
                 <Entry Placeholder="Username" Text="{Binding Username}" />
@@ -25,10 +25,10 @@
         </StackLayout>
 
         <StackLayout Orientation="Horizontal">
-            <Frame MaximumHeightRequest="60" Margin="-20,0,0,0" Padding="10" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand" MaximumWidthRequest="250">
+            <Frame Style="{StaticResource LoginPageFrames}" HasShadow="True" BorderColor="White"  HorizontalOptions="FillAndExpand" MaximumWidthRequest="250">
                 <Entry Placeholder="Password" Text="{Binding Password}" IsPassword="True"/>
             </Frame>
         </StackLayout>
-        <Button Text="Sign In" WidthRequest="100" CornerRadius="20" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
+        <Button Text="Sign In" Style="{StaticResource LoginPageBttn}" HorizontalOptions="Center" Command="{Binding LoginCommand}" />
     </VerticalStackLayout>
 </ContentPage>

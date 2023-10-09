@@ -19,17 +19,23 @@
                                 <DataTemplate x:DataType="models:MenuItem">
                                     <Frame Margin="10">
                                         <StackLayout>
-                                            <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold"/>
+                                            <Label Text="{Binding Name}" Style="{StaticResource MenuItemLabel}" FontSize="Medium"/>
+                                            <Label Text="{Binding ActiveString}" Style="{StaticResource MenuItemLabel}"/>
                                             <Label Text="{Binding Description}"/>
                                             <HorizontalStackLayout>
                                                 <Label Text="Pris: "/>
                                                 <Label Text="{Binding UnitPrice}"/>
                                             </HorizontalStackLayout>
-                                            <Button 
-                                                BackgroundColor="IndianRed"
-                                                HeightRequest="50"
+                                            <HorizontalStackLayout Spacing="10">
+                                                <Button 
+                                                    Style="{StaticResource MenuItemActiveBttn}"
+                                                    HeightRequest="50"
+                                                    Command="{Binding Source={RelativeSource
+                                                        AncestorType={x:Type vm:MenuViewModel}}, Path=UpdateMenuItemCommand}"
+                                                    CommandParameter="{Binding .}"
                                                 
-                                                Text="Utilgængelig"/>
+                                                    Text="Tilgænlighed"/>
+                                            </HorizontalStackLayout>
                                         </StackLayout>
                                     </Frame>
                                 </DataTemplate>
