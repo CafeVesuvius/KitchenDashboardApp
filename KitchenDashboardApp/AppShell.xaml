@@ -3,12 +3,26 @@
     x:Class="KitchenDashboardApp.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:KitchenDashboardApp"
-    Shell.FlyoutBehavior="Disabled">
+    xmlns:models="clr-namespace:KitchenDashboardApp.Model"
+    xmlns:vm="clr-namespace:KitchenDashboardApp.ViewModel"
+    x:DataType="vm:AppShellViewModel"
+    xmlns:local="clr-namespace:KitchenDashboardApp.View"
+    >
 
     <ShellContent
+        FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
         Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+        ContentTemplate="{DataTemplate local:LoadingPage}"  Route="LoadingPage"/>
 
+    <ShellContent
+        Title="Login Page" FlyoutItemIsVisible="False" Shell.FlyoutBehavior="Disabled"
+        ContentTemplate="{DataTemplate local:LoginPage}" Route="LoginPage"/>
+
+
+    <Shell.FlyoutFooter>
+        <StackLayout Padding="20">
+            <Button Text="Log ud" Command="{Binding SignOutCommand}"/>
+        </StackLayout>
+    </Shell.FlyoutFooter>
+    
 </Shell>
