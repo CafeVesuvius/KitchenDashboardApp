@@ -55,7 +55,7 @@
                                         CommandParameter="{Binding .}"
                                         Text="Annuller"/>
                             </StackLayout>
-                            <CollectionView Grid.Column="0" Grid.Row="1"
+                            <CollectionView Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" MaximumWidthRequest="250"
                                     ItemsSource="{Binding OrderLines}">
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="models:OrderLine">
@@ -70,8 +70,7 @@
                                                     <Label Grid.Column="1" Grid.Row="1"
                                                     Text="{Binding Quantity}"/>
                                                 </HorizontalStackLayout>
-                                                <Label Grid.Column="0" Grid.Row="2"
-                                                    MaximumWidthRequest="300"
+                                                <Label Grid.Column="0" Grid.Row="2" 
                                                     Text="{Binding Detail}"/>
                                             </StackLayout>
                                         </Border>
