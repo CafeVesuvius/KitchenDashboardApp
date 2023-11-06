@@ -13,7 +13,7 @@ namespace KitchenDashboardApp.Data
 {
     public class APIAcess
     {
-        static readonly string ApiBaseUrl = "http://10.130.54.74:2000/api/";
+        static readonly string ApiBaseUrl = "http://10.130.54.46:2000/api/";
         static readonly HttpClient client;
 
         static APIAcess()
