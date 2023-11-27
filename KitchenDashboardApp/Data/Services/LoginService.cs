@@ -15,7 +15,7 @@ namespace KitchenDashboardApp.Data.Services
             using(var client  = new HttpClient())
             {
                 string loginRequestJson = JsonConvert.SerializeObject(loginRequest);
-                var response = client.PostAsync("http://10.130.54.46:2000/api/Authentication",
+                var response = client.PostAsync("http://10.130.54.23:2000/api/Authentication",
                     new StringContent(loginRequestJson, Encoding.UTF8, "application/json"));
 
                 if(response.Result.StatusCode == System.Net.HttpStatusCode.OK)
